@@ -5,26 +5,48 @@
 
 <h1>Home</h1>
 
-<div>
+<style>
+    .home-container{
+        display: grid;grid-template-columns: 1fr 3fr;
+    }
+</style>
 
-    <a href="/create-room">Create Room</a>
-
+<div class="home-container">
     <div>
-        {% for room in rooms %}
-        <p>Room: {{room.id}} <small>@{{room.host.username}}</small> - {{room.topic}}</p>
-
-        <div>
-            name:
-            <a href="room/{{room.id}}">
-                {{room.name}}
-            </a>
-        </div>
-        <a href="/update-room/{{room.id}}">Edit</a>
-        <a href="/delete-room/{{room.id}}">Delete</a>
-        
+        Browse Topics
         <hr>
+        <div>
+            <a href="/">All</a>
+        </div>
+        {% for topic in topics %}
+        <div>
+            <a href="?q={{topic.name}}">{{topic}}</a>
+        </div>
         {% endfor %}
     </div>
+
+    <div>
+        <a href="/create-room">Create Room</a>
+
+        <div>
+            {% for room in rooms %}
+            <p>Room: {{room.id}} <small>@{{room.host.username}}</small> - {{room.topic}}</p>
+
+            <div>
+                name:
+                <a href="room/{{room.id}}">
+                    {{room.name}}
+                </a>
+            </div>
+            <a href="/update-room/{{room.id}}">Edit</a>
+            <a href="/delete-room/{{room.id}}">Delete</a>
+
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+
+
 </div>
 
 {% endblock %}
